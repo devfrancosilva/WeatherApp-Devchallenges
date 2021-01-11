@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCurrentCity } from './actions/actions'
 import { Today } from './components/Today'
+import { Week } from './components/Week'
 
 export const App = () => {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ export const App = () => {
   return (
     <div>
       <Today />
+      <Week />
     </div>
   )
 }
