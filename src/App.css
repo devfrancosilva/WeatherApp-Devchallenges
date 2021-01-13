@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --light-gray: #E7E7EB;
+  --gray: #1E213A;
+  --dark-gray: #100E1D;
+} 
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
