@@ -11,7 +11,9 @@ function Wind() {
         <span className={style.title__unity}>mph</span>
       </h1>
       <p className= {style.text__details}>
-          <i className="fas fa-location-arrow"></i>
+        <span class="material-icons" id={style.wind__icon}>
+          near_me
+        </span>
           WSW
       </p>
     </div>

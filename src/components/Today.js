@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { DateTime } from 'luxon'
 import icons from '../helpers/icons'
 import styles from 'styled-components'
+import moment from 'moment';
 
 export const Today = () => {
   const timezone = useSelector((state) => state.currentTimezone).split('/')
@@ -43,6 +44,10 @@ export const Today = () => {
         padding: 1em;
         background: #6E707A;
         margin: 18px 12px 0 0;
+        display: flex;
+        #location {
+          font-size: 22px;
+        }
         @media(min-width: 768px){
           margin: 42px 46px 0 0;
         }
@@ -98,10 +103,16 @@ export const Today = () => {
         line-height: 21px;
         letter-spacing: 0em;
         text-align: center;
-
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #88869D;
-        & i {
-          margin-right: .5em;
+        padding-bottom: 105px;
+        & #place {
+          margin-right: 9px;
+        }
+        @media (min-width: 796px){
+          padding-bottom: 52px;
         }
       }
     }
@@ -112,16 +123,20 @@ export const Today = () => {
       <header className="header">
         <button className="header__button">Search for places</button>
         <span className="header__icon">
-        <i class="fas fa-street-view"></i>
+          <span class="material-icons" id="location">
+          my_location
+          </span>
         </span>
       </header>
       <main className="main">
         <img src={icons[icon]} alt="img principal" className="main__img"/>
         <h1 className="title__h1">{temp}<span>°C</span></h1>
         <h2 className="title__h2">{weather}</h2>
-        <p className="main__today">{date}</p>
-        <small>
-          <i class="fas fa-map-marker-alt"></i>
+        <p className="main__today">{moment().format("[Today - ] ddd, D MMM")}</p>
+        <small className="main__place">
+          <span class="material-icons" id="place">
+            place
+          </span>
           {timezone[timezone.length - 1].replaceAll('_', ' ')}
         </small>
       </main>
