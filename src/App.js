@@ -4,6 +4,7 @@ import { getCurrentCity } from './actions/actions'
 import { Today } from './components/Today'
 import { Week } from './components/Week'
 import HighlightList from './components/HighlightList'
+import HeaderDetails from './components/HeaderDetails'
 import styles from 'styled-components'
 import Wrapper from './components/Wrapper'
 import './App.css';
@@ -17,7 +18,7 @@ export const App = () => {
   }, [dispatch])
 
   const Container = styles.div`
-  @media (min-width: 1000px) {
+  @media (min-width: 1200px) {
     display: grid;
     grid-template-columns: 459px 1fr;
   }
@@ -36,6 +37,7 @@ export const App = () => {
       <Today />
       <DetailsStyle>
         <Wrapper>
+          <HeaderDetails/>
           <Week />
           <HighlightList/>
         </Wrapper>

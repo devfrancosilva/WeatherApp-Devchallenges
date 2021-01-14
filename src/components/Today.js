@@ -22,7 +22,7 @@ export const Today = () => {
     .header {
       display:flex;
       justify-content: space-between;
-      padding: 1em .7em;
+      padding: 0em .7em 1em;
       margin-bottom: 86px;
       @media (min-width: 768px){
         margin-bottom: 109px;
