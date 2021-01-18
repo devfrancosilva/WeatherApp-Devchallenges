@@ -6,11 +6,14 @@ import { Week } from './components/Week'
 import HighlightList from './components/HighlightList'
 import styles from 'styled-components'
 import Wrapper from './components/Wrapper'
-import './App.css';
+import './App.css'
+import Loader from 'react-loader-spinner'
+import { Menu } from './components/Menu'
 
 export const App = () => {
   const dispatch = useDispatch()
   const { loading } = useSelector((state) => state)
+  const { showMenu } = useSelector((state) => state)
 
   useEffect(() => {
     dispatch(getCurrentCity())
@@ -29,15 +32,15 @@ export const App = () => {
   `
 
   if (loading) {
-    return <h2>Loading...</h2>
+    return <Loader type='TailSpin' height={200} width={200} color='#100E1D' />
   }
   return (
     <Container>
-      <Today />
+      {showMenu ? <Menu /> : <Today />}
       <DetailsStyle>
         <Wrapper>
           <Week />
-          <HighlightList/>
+          <HighlightList />
         </Wrapper>
       </DetailsStyle>
     </Container>
