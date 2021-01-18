@@ -6,6 +6,7 @@ const initialState = {
   currentTimezone: '',
   loading: true,
   cities: [],
+  showMenu: false,
 }
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -28,6 +29,11 @@ export const rootReducer = (state = initialState, action) => {
         current: action.payload.current,
         week: action.payload.daily,
         currentTimezone: action.payload.timezone,
+      }
+    case types.showMenu:
+      return {
+        ...state,
+        showMenu: !state.showMenu,
       }
     default:
       return state

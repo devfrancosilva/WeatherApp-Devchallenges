@@ -58,3 +58,7 @@ const setNewCity = (city) => ({
   type: types.setNewCity,
   payload: city,
 })
+
+export const showMenu = () => ({
+  type: types.showMenu,
+})

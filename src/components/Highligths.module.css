@@ -38,8 +38,12 @@
   letter-spacing: 0em;
   margin-top: 0;
   margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.text__details i {
+
+#wind__icon{
   margin-right: .8em;
   display: inline-block;
   background: rgba(255, 255, 255, 0.3);
@@ -85,3 +89,4 @@ progress {
     line-height: 14px;
     color: #A09FB1;
 }
+

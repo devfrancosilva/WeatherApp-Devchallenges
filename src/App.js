@@ -8,10 +8,12 @@ import styles from 'styled-components'
 import Wrapper from './components/Wrapper'
 import './App.css'
 import Loader from 'react-loader-spinner'
+import { Menu } from './components/Menu'
 
 export const App = () => {
   const dispatch = useDispatch()
   const { loading } = useSelector((state) => state)
+  const { showMenu } = useSelector((state) => state)
 
   useEffect(() => {
     dispatch(getCurrentCity())
@@ -34,7 +36,7 @@ export const App = () => {
   }
   return (
     <Container>
-      <Today />
+      {showMenu ? <Menu /> : <Today />}
       <DetailsStyle>
         <Wrapper>
           <Week />
