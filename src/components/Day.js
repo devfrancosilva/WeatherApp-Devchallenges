@@ -23,10 +23,11 @@ export const Day = ({ temp, date, icon }) => {
     }
     img {
       width:50%;
+      min-height: 70px;
       display: block;
       margin: 0 auto;
       margin-bottom: 1em;
-      object-fit: cover;
+      object-fit: contain;
     }
     p {
       font-family: Raleway;

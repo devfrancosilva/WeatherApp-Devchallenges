@@ -1,6 +1,38 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { searchCities } from '../actions/actions'
+import styles from 'styled-components'
+
+const SearchStyle = styles.form`
+  display: flex;
+  justify-content: center;
+  margin-top: 1.9em;
+  margin-bottom: 38px;
+  label {
+    height: 48px;
+    width: 252px;
+    border: 1px solid #E7E7EB;
+    background: transparent;
+    display:flex;
+    align-items: center;
+    span {
+      color: #616475;
+      margin: 0 1em;
+    }
+    input {
+      border: none;
+      background: transparent;
+      color: #E7E7EB;
+    }
+  }
+  button {
+    width: 86px;
+    background: #3C47E9;
+    color: #E7E7EB;
+    border: none;
+    margin-left: 12px;
+  }
+`
 
 export const SearchBar = () => {
   const [city, setCity] = useState('')
@@ -14,11 +46,16 @@ export const SearchBar = () => {
     dispatch(searchCities(searchCity))
   }
   return (
-    <div>
-      <form>
-        <input type='text' value={city} onChange={handleChange} />
+    <>
+      <SearchStyle>
+        <label>
+          <span class="material-icons">
+            search
+          </span> 
+          <input type='text' value={city} onChange={handleChange} placeholder="search location"/>
+        </label>
         <button onClick={handleSubmit}>Search</button>
-      </form>
-    </div>
+      </SearchStyle>
+    </>
   )
 }

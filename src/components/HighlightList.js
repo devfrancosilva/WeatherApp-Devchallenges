@@ -30,8 +30,11 @@ const List = styles.div`
     font-weight: 700;
     line-height: 28px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
     margin-bottom: 32px;
+    @media (min-width:770px){
+      text-align: left;
+    }
   `
   
   const WrapperHighlightList = styles.div`

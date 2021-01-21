@@ -8,14 +8,19 @@ const WeekStyle = styles.div`
   grid-row-gap: 32px;
   grid-column-gap: 26px;
   grid-template-columns: repeat(2, 120px);
-  padding-top: 3rem;
-  justify-content: center;
   margin-bottom: 51px;
+  justify-content: center;
+  padding-top: 52px;
   @media (min-width: 768px){
-    grid-template-columns: repeat(5, 120px);
-    padding-top: 148px;
+    grid-template-columns: repeat(3, 120px);
     margin-bottom: 72px;
+    justify-content: space-evenly;
   }
+  @media (min-width: 992px){
+    grid-template-columns: repeat(5, 120px);
+    padding-top: 66px;
+  }
+
 `
 
 export const Week = () => {
