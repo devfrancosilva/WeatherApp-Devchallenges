@@ -1,60 +1,68 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getNewCity } from '../actions/actions'
+import { useSelector } from 'react-redux'
 import styles from 'styled-components'
+import Loader from 'react-loader-spinner'
+import ShowCities from './ShowCities'
 
-const Item = styles.li`
-  border: 1px solid transparent;
-  background: none;
-  height: 64px;
-  width: 351px;
-  margin: 0 auto;
-  padding: 22px 12px;
+const SearchResults = styles.div`
   color: #E7E7EB;
-  font-family: Raleway;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: left;
-  display: flex;
-  justify-content:space-between;
-  cursor: pointer;
-  span {
-    color: #616475;
-    display: none;
+  width: 351px;
+  margin: auto;
+  h3 {
+    font-size: 1.7em;
+    font-weight: 500;
+    margin-bottom: .7em;
   }
-  &:hover {
-    border: 1px solid #616475;
-    span{
-      display: block;
-    } 
+  p {
+    margin-bottom: .5em;
+    font-size: 1.1em;
+    line-height: 1.6;
   }
 `
 
+const LoaderContainer = styles.div`
+  display: flex;
+  justify-content: center;
+`
+
 export const ListCities = () => {
-  const { cities } = useSelector((state) => state)
-  const dispatch = useDispatch()
+  const { cities, currentSearch, loadingSearch } = useSelector((state) => state)
+
+  if (loadingSearch) {
+    return (<LoaderContainer>
+        <Loader type='TailSpin' height={100} width={100} color='#E7E7EB'/>
+      </LoaderContainer>
+    )
+  }
+
+  if(currentSearch.length === 0){
+    const lastSearches = JSON.parse(localStorage.getItem('lastSearches'));
+    
+    return (
+    <ShowCities
+     cities = {lastSearches}
+    />
+    )
+  }
 
   return (
-    <div>
-      <ul>
-        {cities &&
-          cities.map((city) => (
-            <Item
-              onClick={() =>
-                dispatch(getNewCity(city.coord.lat, city.coord.lon))
-              }
-
-            >
-              {`${city.name}, ${city.sys.country}`}
-              <span class="material-icons">
-                navigate_next
-              </span>
-            </Item>
-          ))}
-      </ul>
-    </div>
+    <>
+      {
+        !cities[0] && currentSearch.length !== 0
+        ? <SearchResults>
+        <h3>¡Perdón!</h3>
+        <p> No pudimos encontrar ningun lugar que coincida con 
+          <strong>'{currentSearch}'</strong>
+        </p>
+        </SearchResults>
+        : 
+          <SearchResults>
+          {currentSearch.length !== 0 && <h3>Resultados para: <em>{currentSearch}</em> ({cities.length})</h3>}
+          <ShowCities
+            cities = {cities}
+          />
+          </SearchResults>
+      }
+    </>
   )
 }

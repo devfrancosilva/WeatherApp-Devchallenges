@@ -1,0 +1,3 @@
+export const API_KEY = '910906c18c36848884a9e502f13402c2';
+
+export const API_KEY_TO_SEARCH = '439d4b804bc8187953eb36d2a8c26a02'

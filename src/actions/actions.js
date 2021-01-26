@@ -1,7 +1,9 @@
 import types from '../types/types'
+import {API_KEY, API_KEY_TO_SEARCH} from '../services/setting'
 
 export const getCurrentCity = () => {
   return async (dispatch) => {
+    dispatch(setLoadingToday())
     try {
       const pos = await new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
@@ -10,7 +12,7 @@ export const getCurrentCity = () => {
         )
       })
       const { latitude, longitude } = pos.coords
-      const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=910906c18c36848884a9e502f13402c2`
+      const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
       const res = await fetch(url)
       const data = await res.json()
       data.daily = data.daily.slice(1, 6)
@@ -29,7 +31,7 @@ const setCurrentCity = (data) => ({
 export const searchCities = (city) => {
   return async (dispatch) => {
     try {
-      const url = `https://openweathermap.org/data/2.5/find?q=${city}&appid=439d4b804bc8187953eb36d2a8c26a02`
+      const url = `https://openweathermap.org/data/2.5/find?q=${city}&appid=${API_KEY_TO_SEARCH}`
       const res = await fetch(url)
       const data = await res.json()
       dispatch(setCities(data))
@@ -39,14 +41,15 @@ export const searchCities = (city) => {
   }
 }
 
-const setCities = (cities) => ({
+export const setCities = (cities) => ({
   type: types.setCities,
   payload: cities,
 })
 
 export const getNewCity = (lat, long) => {
   return async (dispatch) => {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=hourly,minutely&units=metric&appid=910906c18c36848884a9e502f13402c2`
+    dispatch(setLoadingToday())
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
     const res = await fetch(url)
     const data = await res.json()
     data.daily = data.daily.slice(1, 6)
@@ -61,4 +64,21 @@ const setNewCity = (city) => ({
 
 export const showMenu = () => ({
   type: types.showMenu,
+})
+
+export const setCurrentSearch = (city) => ({
+  type: types.setCurrentSearch,
+  payload: city
+})
+
+export const clearCurrentSearch = () => ({
+  type: types.clearCurrentSearch
+})
+
+export const clearCities = () => ({
+  type: types.clearCities
+})
+
+export const setLoadingToday = () => ({
+  type: types.setLoadingToday
 })
