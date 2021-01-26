@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { showMenu } from '../actions/actions'
+import { showMenu, clearCurrentSearch, clearCities } from '../actions/actions'
 import { ListCities } from './ListCities'
 import { SearchBar } from './SearchBar'
 import styles from 'styled-components'
@@ -32,6 +32,8 @@ export const Menu = () => {
   const dispatch = useDispatch()
   const closeMenu = () => {
     dispatch(showMenu())
+    dispatch(clearCurrentSearch())
+    dispatch(clearCities())
   }
   return (
     <MenuStyles>

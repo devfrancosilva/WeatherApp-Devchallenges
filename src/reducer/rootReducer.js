@@ -6,8 +6,12 @@ const initialState = {
   currentTimezone: '',
   loading: true,
   cities: [],
-  showMenu: false,
+  showMenu: false, 
+  currentSearch : '',
+  loadingSearch: false,
+  loadingToday: false
 }
+
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.getCurrentCity:
@@ -17,10 +21,12 @@ export const rootReducer = (state = initialState, action) => {
         week: action.payload.daily,
         currentTimezone: action.payload.timezone,
         loading: false,
+        loadingToday: false
       }
     case types.setCities:
       return {
         ...state,
+        loadingSearch: false,
         cities: action.payload.list,
       }
     case types.setNewCity:
@@ -29,12 +35,39 @@ export const rootReducer = (state = initialState, action) => {
         current: action.payload.current,
         week: action.payload.daily,
         currentTimezone: action.payload.timezone,
+        loadingToday: false
       }
     case types.showMenu:
       return {
         ...state,
         showMenu: !state.showMenu,
       }
+
+    case types.setCurrentSearch:
+      return {
+        ...state,
+        loadingSearch: true,
+        currentSearch : action.payload
+      }
+
+    case types.clearCurrentSearch:
+      return {
+        ...state,
+        currentSearch : ''
+      }
+    
+    case types.clearCities:
+      return {
+        ...state,
+        cities: []
+      }
+
+    case types.setLoadingToday: 
+      return {
+        ...state,
+        loadingToday: true
+      }
+    
     default:
       return state
   }

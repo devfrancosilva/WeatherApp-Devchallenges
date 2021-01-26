@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { searchCities } from '../actions/actions'
+import { searchCities, setCurrentSearch } from '../actions/actions'
 import styles from 'styled-components'
 
 const SearchStyle = styles.form`
@@ -23,6 +23,8 @@ const SearchStyle = styles.form`
       border: none;
       background: transparent;
       color: #E7E7EB;
+      width: 100%;
+      margin-right: 1em;
     }
   }
   button {
@@ -37,14 +39,20 @@ const SearchStyle = styles.form`
 export const SearchBar = () => {
   const [city, setCity] = useState('')
   const dispatch = useDispatch()
+  
   const handleChange = (e) => {
     setCity(e.target.value)
   }
   const handleSubmit = (e) => {
     e.preventDefault()
+    dispatch(setCurrentSearch(city))
     const searchCity = city.replaceAll(' ', '%20')
     dispatch(searchCities(searchCity))
+    clearSearch()
   }
+
+  const clearSearch = () => setCity('');
+
   return (
     <>
       <SearchStyle>
