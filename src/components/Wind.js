@@ -13,7 +13,7 @@ function Wind() {
         <span className={style.title__unity}>mph</span>
       </h1>
       <p className= {style.text__details}>
-        <span class="material-icons" id={style.wind__icon} 
+        <span className="material-icons" id={style.wind__icon} 
         style={{
           transform: `rotate(${current.wind_deg}deg)`
         }}>

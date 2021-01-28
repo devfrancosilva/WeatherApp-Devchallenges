@@ -161,7 +161,7 @@ export const Today = () => {
           Search for places
         </button>
         <button className='header__icon' onClick={handleCurrentClick}>
-          <span class='material-icons' id='location'>
+          <span className='material-icons' id='location'>
             my_location
           </span>
         </button>

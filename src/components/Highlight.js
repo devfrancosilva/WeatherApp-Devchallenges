@@ -94,12 +94,11 @@ function Highlight({highlight, unity, value, details }) {
     <HighlightStyled>
       <h6>{highlight}</h6>
       <h1>{value}<span>{unity}</span></h1>
-      {console.log('details: '+ details)}
       {
         details && 
         details.type === 'icon'? 
         (<p className= 'text-details'>
-          <i class="fas fa-location-arrow"></i>
+          <i className="fas fa-location-arrow"></i>
           WSW
         </p>)
         : null
