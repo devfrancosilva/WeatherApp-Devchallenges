@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from 'styled-components'
-import { useSelector } from 'react-redux'
 import Wind from './Wind'
 import AirPressure from './AirPressure'
 import Humidity from './Humidity'
@@ -42,8 +41,6 @@ const WrapperHighlightList = styles.div`
   `
 
 function HighlightList() {
-  const current = useSelector((state) => state.current)
-  console.log(current)
 
   return (
     <WrapperHighlightList>

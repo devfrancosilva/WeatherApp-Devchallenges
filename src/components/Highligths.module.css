@@ -49,7 +49,7 @@
   background: rgba(255, 255, 255, 0.3);
   padding: .7em;
   border-radius: 50%;
-  transform: rotate(-180deg);
+  /* transform: rotate(-180deg); */
 }
 
 progress {

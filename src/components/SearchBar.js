@@ -68,7 +68,7 @@ export const SearchBar = () => {
     <>
       <SearchStyle>
         <label>
-          <span class='material-icons'>search</span>
+          <span className='material-icons'>search</span>
           <input
             type='text'
             value={city}

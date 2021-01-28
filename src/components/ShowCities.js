@@ -60,7 +60,7 @@ export default function ShowCities({cities}) {
             onClick={() => handleClick(city)}
           >
             {`${city.name}, ${city.sys.country}`}
-            <span class="material-icons">
+            <span className="material-icons">
               navigate_next
             </span>
           </Item>

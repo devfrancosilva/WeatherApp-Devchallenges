@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from 'styled-components'
 import { setCelsius, setFahrenheit } from '../actions/actions'
 
@@ -20,24 +20,26 @@ const HeaderStyle = styles.div`
       border: none;
       border-radius: 50%;
       display: inline-block;
+      background: #585676;
+      color: #E7E7EB;
       &:hover {
         cursor: pointer;
       }
     }
-    .celcius {
-      background: #E7E7EB;
-      color: #110E3C;
+    .degrees {
       margin-right: 12px;
     }
-    .fahrenheit {
-      background: #585676;
-      color: #E7E7EB;
+    .isActive {
+      background: #E7E7EB;
+      color: #110E3C;
+      transition: all .5s ease;
     }
   }
   `
 
 const HeaderDetails = () => {
   const dispatch = useDispatch()
+  const {fahrenheit} = useSelector(state => state)
   const handleFahrenheit = () => {
     dispatch(setFahrenheit())
   }
@@ -46,10 +48,10 @@ const HeaderDetails = () => {
   }
   return (
     <HeaderStyle className='header'>
-      <button className='celcius' onClick={handleCelsius}>
+      <button className={`degrees ${!fahrenheit? 'isActive' : ''}`} onClick={handleCelsius}>
         ℃
       </button>
-      <button className='fahrenheit' onClick={handleFahrenheit}>
+      <button className={`${fahrenheit? 'isActive' : ''}`} onClick={handleFahrenheit}>
         ℉
       </button>
     </HeaderStyle>

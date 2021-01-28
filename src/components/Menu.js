@@ -39,7 +39,7 @@ export const Menu = () => {
     <MenuStyles>
       <p className="buttonContainer">
         <button onClick={closeMenu}>
-          <span class="material-icons icon-close">
+          <span className="material-icons icon-close">
             close
           </span>
         </button>

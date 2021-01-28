@@ -41,7 +41,11 @@ export const App = () => {
 
 
   if (loading) {
-    return <Loader type='TailSpin' height={200} width={200} color='#100E1D' className="loader"/>
+    return (
+      <LoaderContainer>
+        <Loader type='TailSpin' height={200} width={200} color='#1E213A' className="loader"/>
+      </LoaderContainer>
+    )
   }
   return (
     <Container>
