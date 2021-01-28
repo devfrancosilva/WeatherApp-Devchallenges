@@ -2,10 +2,9 @@ import React from 'react'
 import { DateTime } from 'luxon'
 import icons from '../helpers/icons'
 import styles from 'styled-components'
+import { useSelector } from 'react-redux'
 
-export const Day = ({ temp, date, icon }) => {
-
-  const DayStyle = styles.div`
+const DayStyle = styles.div`
     width: 120px;
     height: 177px;
     background-color: #1E213A;
@@ -42,18 +41,29 @@ export const Day = ({ temp, date, icon }) => {
       }
       .max {
         color: #A09FB1;
+        margin-left: 5px;
       }
     }
   `
 
+export const Day = ({ temp, date, icon }) => {
+  const { fahrenheit } = useSelector((state) => state)
   const { min, max } = temp
+  const celsiusToFahMin = Math.round((min * 9) / 5 + 32)
+  const celsiusToFahMax = Math.round((max * 9) / 5 + 32)
   return (
     <DayStyle>
-      <h2 className="title__h2">{DateTime.fromSeconds(date).toFormat('ccc, d LLL')}</h2>
+      <h2 className='title__h2'>
+        {DateTime.fromSeconds(date).toFormat('ccc, d LLL')}
+      </h2>
       <img src={icons[icon]} alt='Icon Weather' />
       <p>
-        <span className="min">{parseInt(max)}℃ </span>
-        <span className="max">{parseInt(min)}℃</span>
+        <span className='min'>
+          {fahrenheit ? `${celsiusToFahMin}℉` : `${Math.round(min)}℃`}
+        </span>
+        <span className='max'>
+          {fahrenheit ? `${celsiusToFahMax}℉` : `${Math.round(max)}℃`}
+        </span>
       </p>
     </DayStyle>
   )

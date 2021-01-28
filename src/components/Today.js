@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../helpers/icons'
 import styles from 'styled-components'
-import moment from 'moment'
 import { showMenu, getCurrentCity } from '../actions/actions'
 import Loader from 'react-loader-spinner'
 
@@ -119,28 +118,34 @@ const TodayStyle = styles.div`
     }
   `
 
-  const LoaderContainer = styles.div`
+const LoaderContainer = styles.div`
   display: flex;
   justify-content: center;
 `
 
 export const Today = () => {
   const timezone = useSelector((state) => state.currentTimezone).split('/')
-  const {loadingToday} = useSelector(state => state)
-  const temp = parseInt(useSelector((state) => state.current.temp))
+  const { loadingToday } = useSelector((state) => state)
+  const temp = Math.round(useSelector((state) => state.current.temp))
   const weather = useSelector((state) => state.current.weather[0].main)
   const icon = useSelector((state) => state.current.weather[0].icon)
   const dispatch = useDispatch()
-  const {dt} = useSelector((state) => state.current)
+  const { dt } = useSelector((state) => state.current)
+  const { fahrenheit } = useSelector((state) => state)
 
   // convierto the Unix Timestamp to ms
-  
-  const miliseconds = dt * 1000;
-  const dataObject = new Date(miliseconds)
-  const today_weekday = dataObject.toLocaleDateString("en-US", {weekday: "short"});
-  const today_numeric = dataObject.toLocaleDateString("en-US", {day: "numeric"});
-  const today_month = dataObject.toLocaleDateString("en-US", {month: "short"});
 
+  const miliseconds = dt * 1000
+  const dataObject = new Date(miliseconds)
+  const today_weekday = dataObject.toLocaleDateString('en-US', {
+    weekday: 'short',
+  })
+  const today_numeric = dataObject.toLocaleDateString('en-US', {
+    day: 'numeric',
+  })
+  const today_month = dataObject.toLocaleDateString('en-US', { month: 'short' })
+
+  const celsiusToFah = Math.round((temp * 9) / 5 + 32)
   const handleSearch = () => {
     dispatch(showMenu())
   }
@@ -155,37 +160,35 @@ export const Today = () => {
         <button className='header__button' onClick={handleSearch}>
           Search for places
         </button>
-        <button className='header__icon' onClick= {handleCurrentClick}>
+        <button className='header__icon' onClick={handleCurrentClick}>
           <span class='material-icons' id='location'>
             my_location
           </span>
         </button>
       </header>
-      {
-        loadingToday
-        ? (<LoaderContainer>
-          <Loader type='TailSpin' height={100} width={100} color='#E7E7EB'/>
-        </LoaderContainer>)
-        : (
+      {loadingToday ? (
+        <LoaderContainer>
+          <Loader type='TailSpin' height={100} width={100} color='#E7E7EB' />
+        </LoaderContainer>
+      ) : (
         <main className='main'>
           <img src={icons[icon]} alt='img principal' className='main__img' />
           <h1 className='title__h1'>
-            {temp}
-            <span>°C</span>
+            {fahrenheit ? celsiusToFah : temp}
+            <span>{fahrenheit ? '°F' : '°C'}</span>
           </h1>
           <h2 className='title__h2'>{weather}</h2>
           <p className='main__today'>
             {`Today - ${today_weekday}, ${today_numeric} ${today_month}`}
           </p>
           <small className='main__place'>
-            <span class='material-icons' id='place'>
+            <span className='material-icons' id='place'>
               place
             </span>
             {timezone[timezone.length - 1].replaceAll('_', ' ')}
           </small>
         </main>
-        ) 
-      }
+      )}
     </TodayStyle>
   )
 }

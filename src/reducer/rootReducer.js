@@ -6,10 +6,11 @@ const initialState = {
   currentTimezone: '',
   loading: true,
   cities: [],
-  showMenu: false, 
-  currentSearch : '',
+  showMenu: false,
+  currentSearch: '',
   loadingSearch: false,
-  loadingToday: false
+  loadingToday: false,
+  fahrenheit: false,
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -21,7 +22,7 @@ export const rootReducer = (state = initialState, action) => {
         week: action.payload.daily,
         currentTimezone: action.payload.timezone,
         loading: false,
-        loadingToday: false
+        loadingToday: false,
       }
     case types.setCities:
       return {
@@ -35,7 +36,7 @@ export const rootReducer = (state = initialState, action) => {
         current: action.payload.current,
         week: action.payload.daily,
         currentTimezone: action.payload.timezone,
-        loadingToday: false
+        loadingToday: false,
       }
     case types.showMenu:
       return {
@@ -47,27 +48,38 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         loadingSearch: true,
-        currentSearch : action.payload
+        currentSearch: action.payload,
       }
 
     case types.clearCurrentSearch:
       return {
         ...state,
-        currentSearch : ''
+        currentSearch: '',
       }
-    
+
     case types.clearCities:
       return {
         ...state,
-        cities: []
+        cities: [],
       }
 
-    case types.setLoadingToday: 
+    case types.setLoadingToday:
       return {
         ...state,
-        loadingToday: true
+        loadingToday: true,
       }
-    
+
+    case types.setFahrenheit:
+      return {
+        ...state,
+        fahrenheit: true,
+      }
+    case types.setCelsius:
+      return {
+        ...state,
+        fahrenheit: false,
+      }
+
     default:
       return state
   }
