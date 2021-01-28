@@ -1,5 +1,5 @@
 import types from '../types/types'
-import {API_KEY, API_KEY_TO_SEARCH} from '../services/setting'
+import { API_KEY, API_KEY_TO_SEARCH } from '../services/setting'
 
 export const getCurrentCity = () => {
   return async (dispatch) => {
@@ -68,17 +68,25 @@ export const showMenu = () => ({
 
 export const setCurrentSearch = (city) => ({
   type: types.setCurrentSearch,
-  payload: city
+  payload: city,
 })
 
 export const clearCurrentSearch = () => ({
-  type: types.clearCurrentSearch
+  type: types.clearCurrentSearch,
 })
 
 export const clearCities = () => ({
-  type: types.clearCities
+  type: types.clearCities,
 })
 
 export const setLoadingToday = () => ({
-  type: types.setLoadingToday
+  type: types.setLoadingToday,
+})
+
+export const setFahrenheit = () => ({
+  type: types.setFahrenheit,
+})
+
+export const setCelsius = () => ({
+  type: types.setCelsius,
 })

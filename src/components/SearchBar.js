@@ -33,36 +33,52 @@ const SearchStyle = styles.form`
     color: #E7E7EB;
     border: none;
     margin-left: 12px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `
 
 export const SearchBar = () => {
   const [city, setCity] = useState('')
   const dispatch = useDispatch()
-  
+  const [disabled, setDisabled] = useState(true)
+
   const handleChange = (e) => {
     setCity(e.target.value)
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(setCurrentSearch(city))
-    const searchCity = city.replaceAll(' ', '%20')
-    dispatch(searchCities(searchCity))
-    clearSearch()
+    if (e.target.value.length > 0) setDisabled(false)
   }
 
-  const clearSearch = () => setCity('');
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (city.trim().length === 0) {
+      setDisabled(true)
+    } else {
+      dispatch(setCurrentSearch(city))
+      const searchCity = city.replaceAll(' ', '%20')
+      dispatch(searchCities(searchCity))
+      clearSearch()
+    }
+  }
+
+  const clearSearch = () => setCity('')
 
   return (
     <>
       <SearchStyle>
         <label>
-          <span class="material-icons">
-            search
-          </span> 
-          <input type='text' value={city} onChange={handleChange} placeholder="search location"/>
+          <span class='material-icons'>search</span>
+          <input
+            type='text'
+            value={city}
+            onChange={handleChange}
+            placeholder='search location'
+          />
         </label>
-        <button onClick={handleSubmit}>Search</button>
+        <button onClick={handleSubmit} disabled={disabled}>
+          Search
+        </button>
       </SearchStyle>
     </>
   )

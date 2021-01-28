@@ -1,11 +1,10 @@
 import React from 'react'
 import styles from 'styled-components'
-import Wrapper from './Wrapper'
 import { useSelector } from 'react-redux'
-import Wind from './Wind';
-import AirPressure from './AirPressure';
-import Humidity from './Humidity';
-import Visibility from './Visibility';
+import Wind from './Wind'
+import AirPressure from './AirPressure'
+import Humidity from './Humidity'
+import Visibility from './Visibility'
 
 const List = styles.div`
   display: grid;
@@ -21,8 +20,8 @@ const List = styles.div`
   }
     justify-content: center;
   `
-  
-  const Title = styles.h2`
+
+const Title = styles.h2`
     color: #E7E7EB;
     font-family: Raleway;
     font-size: 24px;
@@ -36,14 +35,13 @@ const List = styles.div`
       text-align: left;
     }
   `
-  
-  const WrapperHighlightList = styles.div`
+
+const WrapperHighlightList = styles.div`
     background: var(--dark-gray);
     padding: 1.5em 0;
   `
 
 function HighlightList() {
-
   const current = useSelector((state) => state.current)
   console.log(current)
 
@@ -51,10 +49,10 @@ function HighlightList() {
     <WrapperHighlightList>
       <Title>Today's Highlights</Title>
       <List>
-        <Wind/>
-        <Humidity/>
-        <Visibility/>
-        <AirPressure/>
+        <Wind />
+        <Humidity />
+        <Visibility />
+        <AirPressure />
       </List>
     </WrapperHighlightList>
   )
