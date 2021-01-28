@@ -6,7 +6,9 @@ const types = {
   setCurrentSearch: 'Set Current Search',
   clearCurrentSearch: 'Clear Current Search',
   clearCities: 'Clear Cities',
-  setLoadingToday: 'Set Loading Today'
+  setLoadingToday: 'Set Loading Today',
+  setFahrenheit: 'Set Fahrenheit',
+  setCelsius: 'Set Celsius',
 }
 
 export default types
