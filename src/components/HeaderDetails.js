@@ -21,6 +21,7 @@ const HeaderStyle = styles.div`
       border-radius: 50%;
       display: inline-block;
       background: #585676;
+      outline: none;
       color: #E7E7EB;
       &:hover {
         cursor: pointer;
@@ -39,7 +40,7 @@ const HeaderStyle = styles.div`
 
 const HeaderDetails = () => {
   const dispatch = useDispatch()
-  const {fahrenheit} = useSelector(state => state)
+  const { fahrenheit } = useSelector((state) => state)
   const handleFahrenheit = () => {
     dispatch(setFahrenheit())
   }
@@ -48,10 +49,16 @@ const HeaderDetails = () => {
   }
   return (
     <HeaderStyle className='header'>
-      <button className={`degrees ${!fahrenheit? 'isActive' : ''}`} onClick={handleCelsius}>
+      <button
+        className={`degrees ${!fahrenheit ? 'isActive' : ''}`}
+        onClick={handleCelsius}
+      >
         ℃
       </button>
-      <button className={`${fahrenheit? 'isActive' : ''}`} onClick={handleFahrenheit}>
+      <button
+        className={`${fahrenheit ? 'isActive' : ''}`}
+        onClick={handleFahrenheit}
+      >
         ℉
       </button>
     </HeaderStyle>

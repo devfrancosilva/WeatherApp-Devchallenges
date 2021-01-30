@@ -28,6 +28,7 @@ const LoaderContainer = styles.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background: #100E1D;
 `
 
 export const App = () => {
@@ -39,11 +40,16 @@ export const App = () => {
     dispatch(getCurrentCity())
   }, [dispatch])
 
-
   if (loading) {
     return (
       <LoaderContainer>
-        <Loader type='TailSpin' height={200} width={200} color='#1E213A' className="loader"/>
+        <Loader
+          type='TailSpin'
+          height={200}
+          width={200}
+          color='#FFF'
+          className='loader'
+        />
       </LoaderContainer>
     )
   }
@@ -51,20 +57,17 @@ export const App = () => {
     <Container>
       {showMenu ? <Menu /> : <Today />}
       <DetailsStyle>
-        {
-          loadingToday
-          ? (<LoaderContainer>
-            <Loader type='TailSpin' height={100} width={100} color='#E7E7EB'/>
-          </LoaderContainer>)
-          : (
+        {loadingToday ? (
+          <LoaderContainer>
+            <Loader type='TailSpin' height={100} width={100} color='#E7E7EB' />
+          </LoaderContainer>
+        ) : (
           <Wrapper>
-            <HeaderDetails/>
+            <HeaderDetails />
             <Week />
             <HighlightList />
           </Wrapper>
-          ) 
-
-        }
+        )}
       </DetailsStyle>
     </Container>
   )

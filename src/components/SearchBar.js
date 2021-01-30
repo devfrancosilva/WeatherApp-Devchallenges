@@ -25,6 +25,7 @@ const SearchStyle = styles.form`
       color: #E7E7EB;
       width: 100%;
       margin-right: 1em;
+      outline: none;
     }
   }
   button {
@@ -46,7 +47,7 @@ export const SearchBar = () => {
 
   const handleChange = (e) => {
     setCity(e.target.value)
-    if (e.target.value.length > 0) setDisabled(false)
+    if (e.target.value.length >= 3) setDisabled(false)
   }
 
   const handleSubmit = (e) => {
